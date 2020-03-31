@@ -61,7 +61,7 @@
         <plugins>
 
             <plugin>
-                <groupId>com.github.icon02</groupId>
+                <groupId>org.sonatype.plugins</groupId>
                 <artifactId>nexus-staging-maven-plugin</artifactId>
                 <version>1.6.7</version>
                 <extensions>true</extensions>
