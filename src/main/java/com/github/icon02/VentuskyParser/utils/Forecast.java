@@ -1,4 +1,4 @@
-package com.icon02.VentuskyParser.utils;
+package com.github.icon02.VentuskyParser.utils;
 
 import org.json.JSONObject;
 

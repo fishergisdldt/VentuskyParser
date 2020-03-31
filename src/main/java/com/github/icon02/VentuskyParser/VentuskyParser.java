@@ -1,19 +1,14 @@
-package com.icon02.VentuskyParser;
+package com.github.icon02.VentuskyParser;
 
-import com.icon02.VentuskyParser.utils.Forecast;
-import com.icon02.VentuskyParser.utils.exception.DateNotInBoundsException;
-import org.json.JSONArray;
+import com.github.icon02.VentuskyParser.utils.Forecast;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
-import org.jsoup.Jsoup.*;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 
 public class VentuskyParser {
 
