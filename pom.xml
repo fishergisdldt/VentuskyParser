@@ -7,6 +7,11 @@
     <groupId>com.icon02</groupId>
     <artifactId>VentuskyParser</artifactId>
     <version>1.0</version>
+    <description>
+        Simple Project that connects to http://www.ventusky.com and delivers today's weather and today's forecast.
+        Please note that I will not be informed if changes are made to the website. That can cause to exceptions being
+        thrown.
+    </description>
 
     <dependencies>
         <dependency>
