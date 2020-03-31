@@ -35,61 +35,13 @@ public class VentuskyParser {
 
     private Element aside;
 
-    public VentuskyParser(double lat, double lan) throws IOException {
-        this.lat = lat;
-        this.lan = lan;
-
-        refresh();
-    }
-
-    public void refresh() throws IOException {
-        aside = Jsoup.connect(getFullUrl()).get().body().getElementById(aside_element_id);
-    }
-
-    public void printAll() {
-        printAll(document.body());
-    }
-
-    public void printAll(Element element) {
-        for (Element child : element.getAllElements()) printAll(child);
-
-        System.out.println(element.data());
-    }
-
-    public String getCurrentTemperature() {
-        Element actual = aside.getElementById("actual");
-        Elements temperature = actual.getElementsByClass("temperature");
-        String data = temperature.get(0).childNode(0).toString(); // will be something link "4 °C"
-
-        return data;
-    }
-
-    public int getCurrentTemperature(int goalMetric) {
-        String data = getCurrentTemperature();
-        int temperature = toIntValue(data);
-        int dataMetric;
-        if (data.endsWith("F")) dataMetric = METRIC_FAHRENHEIT;
-        else if (data.endsWith("C")) dataMetric = METRIC_CELSIUS;
-        else {
-            System.err.println("Temperature Unit not supported. (Temperature Unit: " + data.charAt(data.length() - 1));
-            return ERROR;
-        }
-
-        if (dataMetric == goalMetric) {
-
-        }
-
-        return -1;
-    }
-
-
     /**
      * (0 °C × 9/5) + 32 = 32 °F
      *
      * @param cel
      * @return
      */
-    public float celsius2Fahrenheit(float cel) {
+    public static float celsius2Fahrenheit(float cel) {
         return (cel * (9f / 5f)) + 32;
     }
 
@@ -99,8 +51,32 @@ public class VentuskyParser {
      * @param fahrenheit
      * @return
      */
-    public float fahrenheit2Celsius(float fahrenheit) {
+    public static float fahrenheit2Celsius(float fahrenheit) {
         return (fahrenheit - 32) * (5f / 9f);
+    }
+
+    public VentuskyParser(double lat, double lan) throws IOException {
+        this.lat = lat;
+        this.lan = lan;
+
+        refresh();
+    }
+
+    /**
+     * Reconnects to ventusky and gets current data.
+     * Data will remain the same until this method is called.
+     * @throws IOException
+     */
+    public void refresh() throws IOException {
+        aside = Jsoup.connect(getFullUrl()).get().body().getElementById(aside_element_id);
+    }
+
+    public String getCurrentTemperature() {
+        Element actual = aside.getElementById("actual");
+        Elements temperature = actual.getElementsByClass("temperature");
+        String data = temperature.get(0).childNode(0).toString(); // will be something link "4 °C"
+
+        return data;
     }
 
     private String getFullUrl() {
